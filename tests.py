@@ -1,18 +1,18 @@
-ffrom main import BooksCollector
+from main import BooksCollector
 
-    # класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollectore
+    # класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollector
     # обязательно указывать префикс Teste
 class TestBooksCollector:
 
     # пример теста:
     # обязательно указывать префикс test_
     # дальше идет название метода, который тестируем add_new_book_
-    # затем, что тестируем add_two_books - добавление двух книгddg
+    # затем, что тестируем add_two_books - добавление двух книг
     def test_add_new_book_add_two_books(self):
         # создаем экземпляр (объект) класса BooksCollector
         collector = BooksCollector()
 
-        # добавляем две книгии
+        # добавляем две книги
         collector.add_new_book('Гордость и предубеждение и зомби')
         collector.add_new_book('Что делать, если ваш кот хочет вас убить')
 
@@ -30,9 +30,17 @@ class TestBooksCollector:
 
     def test_get_book_genre(self):
         collector = BooksCollector()
+
         collector.add_new_book('Кино')
+        collector.add_new_book('ПОСТ')
+
         collector.set_book_genre('Кино', 'Мультфильмы')
+        collector.set_book_genre('ПОСТ', 'Фантастика')
+
         assert collector.get_book_genre('Кино') == 'Мультфильмы'
+        assert collector.get_book_genre('ПОСТ') == 'Ошибочный жанр'
+
+
 
     def test_get_books_with_specific_genre(self):
         collector = BooksCollector()
@@ -61,7 +69,6 @@ class TestBooksCollector:
         collector = BooksCollector()
 
         collector.add_new_book('Фунтик')
-        collector.set_book_genre('Фунтик', 'Мультфильмы')
         collector.add_book_in_favorites('Фунтик')
 
         assert 'Фунтик' in collector.favorites
@@ -80,4 +87,15 @@ class TestBooksCollector:
 
     def test_get_list_of_favorites_books(self):
         collector = BooksCollector()
-        assert len(collector.favorites) == 0
+        collector.add_new_book('Фунтик')
+        collector.add_new_book('1984')
+
+        collector.add_book_in_favorites('Фунтик')
+        collector.add_book_in_favorites('1984')
+
+        favorites = collector.get_list_of_favorites_books ()
+
+        assert len(favorites) > 0
+        assert'Фунтик' in favorites
+        assert '1984' in favorites
+
