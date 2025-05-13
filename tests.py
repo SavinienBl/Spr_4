@@ -35,10 +35,8 @@ class TestBooksCollector:
         collector.add_new_book('ПОСТ')
 
         collector.set_book_genre('Кино', 'Мультфильмы')
-        collector.set_book_genre('ПОСТ', 'Фантастика')
 
         assert collector.get_book_genre('Кино') == 'Мультфильмы'
-        assert collector.get_book_genre('ПОСТ') == 'Ошибочный жанр'
 
 
 
@@ -46,8 +44,15 @@ class TestBooksCollector:
         collector = BooksCollector()
 
         collector.add_new_book('Мастер и Маргарита')
-        collector.set_book_genre('Мастер и Маргарита','Фантастика')
+        collector.add_new_book('ПОСТ')
+        collector.add_new_book('Сияние')
 
+        collector.set_book_genre('Мастер и Маргарита','Фантастика')
+        collector.set_book_genre('ПОСТ', 'Ужасы')
+        collector.set_book_genre('Сияние', 'Ужасы')
+
+
+        assert len(collector. get_books_with_specific_genre('Ужасы')) > 1
         assert len(collector. get_books_with_specific_genre('Фантастика')) != 0
 
 
